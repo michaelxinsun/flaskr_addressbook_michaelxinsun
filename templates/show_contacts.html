@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body %}
+	{% if session.logged_in %}
+		<form action="{{ url_for("add_contact") }}" method=post class=add-contact>
+			<dl>
+				<dt>First Name:
+				<dd><input type=text size=30 name=firstname>
+				<dt>Middle Name (optional):
+				<dd><input type=text size=30 name=middlename>
+				<dt>Last Name:
+				<dd><input type=text size=30 name=lastname>
+                <dt>Physical Address:
+                <dd><input type=text size=100 name=address>
+                <dt>Phone:
+                <dd><input type=text size=20 name=phone>
+                <dt>Email:
+                <dd><input type=text size=30 name=email>
+				<dd><input type=submit value=Share>
+			</dl>
+		</form>
+	{% endif %}
+	<ul class=contacts >
+	{% for contact in contacts %}
+		<li><h2>{{ contact.firstname }}{{ contact.middlename }}{{ contact.lastname }}</h2>
+		<li>{{ contact.address }}
+		<li>{{ contact.phone }}
+		<li>{{ contact.email }}
+	{% else %}
+		<li><em>Unbelievable. No entries here so far</em>
+	{% endfor %}
+	</ul>
+{% endblock %}
